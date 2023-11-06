@@ -41,6 +41,7 @@ const Invoice: React.FC<Props> = ({ locale, currency }) => {
               type="number"
               className="text-right"
               min="1"
+              max="999999999"
               value={totalTaxableAmount}
               onChange={(event) => setTotalTaxableAmount(+event.target.value)}
             ></input>
