@@ -30,7 +30,7 @@ const Invoice: React.FC<Props> = ({ locale, currency }) => {
       <thead>
         <tr>
           <th className="text-left font-bold text-gray-700">Description</th>
-          <th className="text-right font-bold text-gray-700">Amount ($)</th>
+          <th className="text-right font-bold text-gray-700">Amount</th>
         </tr>
       </thead>
       <tbody>
