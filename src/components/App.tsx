@@ -3,28 +3,11 @@ import logo from "../assets/logo.svg";
 import "./App.css";
 import { Formatter } from "../utils/formatter";
 import Settings from "./Settings";
+import Invoice from "./Invoice";
 
 function App() {
   const [locale, setLocale] = useState("it-IT");
   const [currency, setCurrency] = useState("EUR");
-
-  const [totalTaxableAmount, setTotalTaxableAmount] = useState(500);
-
-  function getTaxableAmountVat() {
-    return totalTaxableAmount * 0.22;
-  }
-
-  function getTotalInvoice() {
-    return totalTaxableAmount + getTaxableAmountVat();
-  }
-
-  function getWithholdingTax() {
-    return totalTaxableAmount * 0.2;
-  }
-
-  function getTotalDebt() {
-    return getTotalInvoice() - getWithholdingTax();
-  }
 
   return (
     <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-xl mx-auto mt-8">
@@ -43,55 +26,7 @@ function App() {
       <hr className="mb-2" />
 
       <h1 className="text-lg font-bold">Invoice</h1>
-      <table className="w-full mb-8">
-        <thead>
-          <tr>
-            <th className="text-left font-bold text-gray-700">Description</th>
-            <th className="text-right font-bold text-gray-700">Amount ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="text-left text-gray-700">Total taxable amount</td>
-            <td className="text-right text-gray-700">
-              <input
-                type="number"
-                className="text-right"
-                value={totalTaxableAmount}
-                onChange={(event) => setTotalTaxableAmount(+event.target.value)}
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left text-gray-700">VAT taxable amount</td>
-            <td className="text-right text-gray-700">
-              {Formatter.formatNumber(getTaxableAmountVat(), locale, currency)}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left text-gray-700">Total invoice</td>
-            <td className="text-right text-gray-700">
-              {Formatter.formatNumber(getTotalInvoice(), locale, currency)}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left text-gray-700">
-              Withdrawal tax on taxable amount
-            </td>
-            <td className="text-right text-gray-700">
-              {Formatter.formatNumber(getWithholdingTax(), locale, currency)}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td className="text-left font-bold text-gray-700">Total debt</td>
-            <td className="text-right font-bold text-gray-700">
-              {Formatter.formatNumber(getTotalDebt(), locale, currency)}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+      <Invoice locale={locale} currency={currency}></Invoice>
       <p className="text-center text-gray-500 text-xs">
         &copy;{new Date().getFullYear()} Martino Bordin. All rights reserved.
       </p>
