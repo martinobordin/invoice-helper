@@ -4,11 +4,6 @@ import "./App.css";
 import { Formatter } from "../utils/formatter";
 
 function App() {
-  const [invoiceDate, setInvoiceDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [invoiceNumber, setInvoiceNumber] = useState("INV12345");
-
   const [locale, setLocale] = useState("it-IT");
   const [currency, setCurrency] = useState("EUR");
 
@@ -39,46 +34,30 @@ function App() {
 
       <hr className="mb-2" />
       <div className="flex justify-between mb-6">
-        <h1 className="text-lg font-bold">Invoice</h1>
-        <div className="text-gray-700">
-          <div>
-            Date:
-            <input
-              type="date"
-              value={invoiceDate}
-              onChange={(event) => setInvoiceDate(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            Invoice #:{" "}
-            <input
-              type="text"
-              value={invoiceNumber}
-              onChange={(event) => setInvoiceNumber(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            Locale:
-            <select
-              value={locale}
-              onChange={(event) => setLocale(event.target.value)}
-            >
-              <option value="it-IT">it-IT</option>
-              <option value="en-US">en-US</option>
-            </select>
-          </div>
-          <div>
-            Currency:
-            <select
-              value={currency}
-              onChange={(event) => setCurrency(event.target.value)}
-            >
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-            </select>
-          </div>
+        <div className="w-full mt-6">
+        <h1 className="text-lg font-bold">Settings</h1>
+          <label htmlFor="locale">Locale</label>
+          <select
+            id="locale"
+            value={locale}
+            onChange={(event) => setLocale(event.target.value)}
+          >
+            <option value="it-IT">it-IT</option>
+            <option value="en-US">en-US</option>
+          </select>
+          <label htmlFor="currency">Currency</label>
+          <select
+            id="currency"
+            value={currency}
+            onChange={(event) => setCurrency(event.target.value)}
+          >
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+          </select>
         </div>
       </div>
+      <hr></hr>
+      <h1 className="text-lg font-bold">Invoice</h1>
       <table className="w-full mb-8">
         <thead>
           <tr>
