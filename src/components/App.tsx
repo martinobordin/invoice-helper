@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "../assets/logo.svg";
 import "./App.css";
 import { Formatter } from "../utils/formatter";
+import Settings from "./Settings";
 
 function App() {
   const [locale, setLocale] = useState("it-IT");
@@ -33,30 +34,14 @@ function App() {
       </h1>
 
       <hr className="mb-2" />
-      <div className="flex justify-between mb-6">
-        <div className="w-full mt-6">
-        <h1 className="text-lg font-bold">Settings</h1>
-          <label htmlFor="locale">Locale</label>
-          <select
-            id="locale"
-            value={locale}
-            onChange={(event) => setLocale(event.target.value)}
-          >
-            <option value="it-IT">it-IT</option>
-            <option value="en-US">en-US</option>
-          </select>
-          <label htmlFor="currency">Currency</label>
-          <select
-            id="currency"
-            value={currency}
-            onChange={(event) => setCurrency(event.target.value)}
-          >
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-          </select>
-        </div>
-      </div>
-      <hr></hr>
+      <Settings
+        locale={locale}
+        currency={currency}
+        setLocale={setLocale}
+        setCurrency={setCurrency}
+      ></Settings>
+      <hr className="mb-2" />
+
       <h1 className="text-lg font-bold">Invoice</h1>
       <table className="w-full mb-8">
         <thead>
