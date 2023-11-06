@@ -1,7 +1,5 @@
 import { useState } from "react";
 import logo from "../assets/logo.svg";
-import "./App.css";
-import { Formatter } from "../utils/formatter";
 import Settings from "./Settings";
 import Invoice from "./Invoice";
 
@@ -23,10 +21,12 @@ function App() {
         setLocale={setLocale}
         setCurrency={setCurrency}
       ></Settings>
+
       <hr className="mb-2" />
 
       <h1 className="text-lg font-bold">Invoice</h1>
       <Invoice locale={locale} currency={currency}></Invoice>
+
       <p className="text-center text-gray-500 text-xs">
         &copy;{new Date().getFullYear()} Martino Bordin. All rights reserved.
       </p>
