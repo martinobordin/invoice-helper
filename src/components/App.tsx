@@ -3,6 +3,7 @@ import logo from "../assets/logo.svg";
 import Settings from "./Settings";
 import Invoice from "./Invoice";
 import { AppSettings } from "../models/AppSettings";
+import Expander from "./Expander";
 
 function App() {
   const initialState = new AppSettings();
@@ -16,10 +17,12 @@ function App() {
       </h1>
 
       <hr className="mb-2" />
-      <Settings
-        appSettings={appSettings}
-        setAppSettings={setAppSettings}
-      ></Settings>
+      <Expander collapseText="Hide settings" expandText="Show settings">
+        <Settings
+          appSettings={appSettings}
+          setAppSettings={setAppSettings}
+        ></Settings>
+      </Expander>
 
       <hr className="mb-2" />
 
