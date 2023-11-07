@@ -23,7 +23,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
               &times;
             </button>
           </div>
-          {children}
+          <div className="my-2">{children}</div>
+
+          <button onClick={onClose} className="btn-primary">
+            Close
+          </button>
         </div>
       </div>
     </div>
