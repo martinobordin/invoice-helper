@@ -17,8 +17,8 @@ const Settings: React.FC<Props> = ({ appSettings, setAppSettings }) => {
   };
 
   return (
-    <div className="flex justify-between mb-6">
-      <div className="w-full mt-6">
+    <div className="flex justify-between">
+      <div className="w-full">
         <h1 className="text-lg font-bold">Settings</h1>
         <label htmlFor="locale">Locale</label>
         <select
