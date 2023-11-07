@@ -3,7 +3,6 @@ import logo from "../assets/logo.svg";
 import Settings from "./Settings";
 import Invoice from "./Invoice";
 import { AppSettings } from "../models/AppSettings";
-import Expander from "./Expander";
 import Modal from "./Modal";
 
 function App() {
