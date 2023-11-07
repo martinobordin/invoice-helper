@@ -70,10 +70,10 @@ const Invoice: React.FC<Props> = ({ appSettings }) => {
       </tbody>
       <tfoot>
         <tr>
-          <td className="text-left font-bold text-gray-700">Total debt</td>
-          <td className="text-right font-bold text-gray-700">
+          <th className="text-left font-bold text-gray-700">Total debt</th>
+          <th className="text-right font-bold text-gray-700">
             {Formatter.formatNumber(getTotalDebt(), appSettings.locale, appSettings.currency)}
-          </td>
+          </th>
         </tr>
       </tfoot>
     </table>

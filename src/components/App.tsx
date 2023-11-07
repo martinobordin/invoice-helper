@@ -39,7 +39,6 @@ function App() {
 
       <hr className="my-2" />
 
-      <h1 className="text-lg font-bold">Invoice</h1>
       <Invoice appSettings={appSettings}></Invoice>
 
       <p className="text-center text-gray-500 text-xs">
