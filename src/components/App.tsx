@@ -2,12 +2,11 @@ import { useState } from "react";
 import logo from "../assets/logo.svg";
 import Settings from "./Settings";
 import Invoice from "./Invoice";
+import { AppSettings } from "../models/AppSettings";
 
 function App() {
-  const [locale, setLocale] = useState("it-IT");
-  const [currency, setCurrency] = useState("EUR");
-  const [vat, setVat] = useState(22);
-  const [withdrawalTax, setWithdrawalTax] = useState(20);
+  const initialState = new AppSettings();
+  const [appSettings, setAppSettings] = useState(initialState);
 
   return (
     <div className="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-xl mx-auto mt-8">
@@ -18,20 +17,14 @@ function App() {
 
       <hr className="mb-2" />
       <Settings
-        locale={locale}
-        currency={currency}
-        vat={vat}
-        withdrawalTax={withdrawalTax}
-        setLocale={setLocale}
-        setCurrency={setCurrency}
-        setVat={setVat}
-        setWithdrawalTax={setWithdrawalTax}
+        appSettings={appSettings}
+        setAppSettings={setAppSettings}
       ></Settings>
 
       <hr className="mb-2" />
 
       <h1 className="text-lg font-bold">Invoice</h1>
-      <Invoice locale={locale} currency={currency} vat={vat} withdrawalTax={withdrawalTax}></Invoice>
+      <Invoice appSettings={appSettings}></Invoice>
 
       <p className="text-center text-gray-500 text-xs">
         &copy;{new Date().getFullYear()} Martino Bordin. All rights reserved.

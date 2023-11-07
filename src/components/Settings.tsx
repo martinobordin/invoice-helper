@@ -1,28 +1,21 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import { AppSettings } from "../models/AppSettings";
 
 interface Props {
-  // Define any props you want to pass to the component
-  locale: string;
-  currency: string;
-  vat: number;
-  withdrawalTax: number;
-  setLocale: (locale: string) => void;
-  setCurrency: (currency: string) => void;
-  setVat: (vatr: number) => void;
-  setWithdrawalTax: (vatr: number) => void;
+  appSettings: AppSettings;
+  setAppSettings: Dispatch<SetStateAction<AppSettings>>;
 }
 
-const Settings: React.FC<Props> = ({
-  locale,
-  currency,
-  vat,
-  withdrawalTax,
-  setLocale,
-  setCurrency,
-  setVat,
-  setWithdrawalTax
-}) => {
-  // Define the component's logic and rendering here
+const Settings: React.FC<Props> = ({ appSettings, setAppSettings }) => {
+  const setAppSettingsValue = (key: string, value: string | number) => {
+    setAppSettings((prevState) => {
+      return {
+        ...prevState,
+        [key]: value,
+      };
+    });
+  };
+
   return (
     <div className="flex justify-between mb-6">
       <div className="w-full mt-6">
@@ -30,8 +23,10 @@ const Settings: React.FC<Props> = ({
         <label htmlFor="locale">Locale</label>
         <select
           id="locale"
-          value={locale}
-          onChange={(event) => setLocale(event.target.value)}
+          value={appSettings.locale}
+          onChange={(event) =>
+            setAppSettingsValue("locale", event.target.value)
+          }
         >
           <option value="it-IT">it-IT</option>
           <option value="en-US">en-US</option>
@@ -39,8 +34,10 @@ const Settings: React.FC<Props> = ({
         <label htmlFor="currency">Currency</label>
         <select
           id="currency"
-          value={currency}
-          onChange={(event) => setCurrency(event.target.value)}
+          value={appSettings.currency}
+          onChange={(event) =>
+            setAppSettingsValue("currency", event.target.value)
+          }
         >
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
@@ -49,19 +46,21 @@ const Settings: React.FC<Props> = ({
         <input
           type="number"
           id="vat"
-          value={vat}
+          value={appSettings.vat}
           min="1"
           max="100"
-          onChange={(event) => setVat(+event.target.value)}
+          onChange={(event) => setAppSettingsValue("vat", +event.target.value)}
         ></input>
-              <label htmlFor="withdrawalTax">Withdrawal Tax %</label>
+        <label htmlFor="withdrawalTax">Withdrawal Tax %</label>
         <input
           type="number"
           id="withdrawalTax"
-          value={withdrawalTax}
+          value={appSettings.withdrawalTax}
           min="1"
           max="100"
-          onChange={(event) => setWithdrawalTax(+event.target.value)}
+          onChange={(event) =>
+            setAppSettingsValue("withdrawalTax", +event.target.value)
+          }
         ></input>
       </div>
     </div>

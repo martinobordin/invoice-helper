@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Formatter } from "../utils/formatter";
+import { AppSettings } from "../models/AppSettings";
 
 interface Props {
-  locale: string;
-  currency: string;
-  vat: number;
-  withdrawalTax: number;
+  appSettings: AppSettings;
 }
 
-const Invoice: React.FC<Props> = ({ locale, currency, vat, withdrawalTax }) => {
+const Invoice: React.FC<Props> = ({ appSettings }) => {
   const [totalTaxableAmount, setTotalTaxableAmount] = useState(500);
 
   function getTaxableAmountVat() {
-    return totalTaxableAmount * (vat / 100);
+    return totalTaxableAmount * (appSettings.vat / 100);
   }
 
   function getTotalInvoice() {
@@ -20,7 +18,7 @@ const Invoice: React.FC<Props> = ({ locale, currency, vat, withdrawalTax }) => {
   }
 
   function getWithholdingTax() {
-    return totalTaxableAmount * (withdrawalTax / 100);
+    return totalTaxableAmount * (appSettings.withdrawalTax / 100);
   }
 
   function getTotalDebt() {
@@ -50,23 +48,23 @@ const Invoice: React.FC<Props> = ({ locale, currency, vat, withdrawalTax }) => {
           </td>
         </tr>
         <tr>
-          <td className="text-left text-gray-700">VAT {vat}% taxable amount</td>
+          <td className="text-left text-gray-700">VAT {appSettings.vat}% taxable amount</td>
           <td className="text-right text-gray-700">
-            {Formatter.formatNumber(getTaxableAmountVat(), locale, currency)}
+            {Formatter.formatNumber(getTaxableAmountVat(), appSettings.locale, appSettings.currency)}
           </td>
         </tr>
         <tr>
           <td className="text-left text-gray-700">Total invoice</td>
           <td className="text-right text-gray-700">
-            {Formatter.formatNumber(getTotalInvoice(), locale, currency)}
+            {Formatter.formatNumber(getTotalInvoice(), appSettings.locale, appSettings.currency)}
           </td>
         </tr>
         <tr>
           <td className="text-left text-gray-700">
-            Withdrawal tax {withdrawalTax}% on taxable amount
+            Withdrawal tax {appSettings.withdrawalTax}% on taxable amount
           </td>
           <td className="text-right text-gray-700">
-            {Formatter.formatNumber(getWithholdingTax(), locale, currency)}
+            {Formatter.formatNumber(getWithholdingTax(), appSettings.locale, appSettings.currency)}
           </td>
         </tr>
       </tbody>
@@ -74,7 +72,7 @@ const Invoice: React.FC<Props> = ({ locale, currency, vat, withdrawalTax }) => {
         <tr>
           <td className="text-left font-bold text-gray-700">Total debt</td>
           <td className="text-right font-bold text-gray-700">
-            {Formatter.formatNumber(getTotalDebt(), locale, currency)}
+            {Formatter.formatNumber(getTotalDebt(), appSettings.locale, appSettings.currency)}
           </td>
         </tr>
       </tfoot>
