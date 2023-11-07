@@ -4,13 +4,15 @@ import { Formatter } from "../utils/formatter";
 interface Props {
   locale: string;
   currency: string;
+  vat: number;
+  withdrawalTax: number;
 }
 
-const Invoice: React.FC<Props> = ({ locale, currency }) => {
+const Invoice: React.FC<Props> = ({ locale, currency, vat, withdrawalTax }) => {
   const [totalTaxableAmount, setTotalTaxableAmount] = useState(500);
 
   function getTaxableAmountVat() {
-    return totalTaxableAmount * 0.22;
+    return totalTaxableAmount * (vat / 100);
   }
 
   function getTotalInvoice() {
@@ -18,7 +20,7 @@ const Invoice: React.FC<Props> = ({ locale, currency }) => {
   }
 
   function getWithholdingTax() {
-    return totalTaxableAmount * 0.2;
+    return totalTaxableAmount * (withdrawalTax / 100);
   }
 
   function getTotalDebt() {
@@ -48,7 +50,7 @@ const Invoice: React.FC<Props> = ({ locale, currency }) => {
           </td>
         </tr>
         <tr>
-          <td className="text-left text-gray-700">VAT taxable amount</td>
+          <td className="text-left text-gray-700">VAT {vat}% taxable amount</td>
           <td className="text-right text-gray-700">
             {Formatter.formatNumber(getTaxableAmountVat(), locale, currency)}
           </td>
@@ -61,7 +63,7 @@ const Invoice: React.FC<Props> = ({ locale, currency }) => {
         </tr>
         <tr>
           <td className="text-left text-gray-700">
-            Withdrawal tax on taxable amount
+            Withdrawal tax {withdrawalTax}% on taxable amount
           </td>
           <td className="text-right text-gray-700">
             {Formatter.formatNumber(getWithholdingTax(), locale, currency)}
